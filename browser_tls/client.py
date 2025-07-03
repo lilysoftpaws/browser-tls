@@ -45,12 +45,12 @@ class BrowserClient:
         headers: Optional[Headers] = None,
         data: Optional[Union[str, Dict[str, Any], list]] = None,
         params: Optional[Dict[str, str]] = None,
-        timeout: float = 0,
+        timeout: Optional[float] = None,
     ) -> Response:
         full_url = apply_query_params(url, params)
         body, final_headers = encode_body_and_headers(data, headers)
         inferred_method = method or ("POST" if body else "GET")
-        timeout_ms = int(timeout * 1000)
+        timeout_ms = int(timeout * 1000) if timeout else 0
 
         async with self.new_context() as context:
             script = build_fetch_script(full_url, inferred_method, final_headers, body, timeout_ms)
