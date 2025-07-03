@@ -1,7 +1,6 @@
-<div>
-  <strong>browser-tls</strong><br>
-  <p style="margin-top: 0;">borrow the fingerprints of real browsers</p>
-</div>
+### browser-tls
+
+Borrow fingerprints from real browsers
 
 ### Features
 

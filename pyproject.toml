@@ -1,7 +1,7 @@
 [project]
 name = "browser-tls"
 version = "0.1.0"
-description = "borrow the fingerprints of browsers"
+description = "borrow fingerprints from real browsers"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = ["playwright>=1.53.0,<2.0"]
