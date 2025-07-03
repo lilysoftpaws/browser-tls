@@ -2,6 +2,7 @@ import json
 from urllib.parse import urlencode
 from typing import Optional, Dict, Any
 
+
 def build_fetch_script(
     url: str,
     method: str,

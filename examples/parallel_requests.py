@@ -10,7 +10,7 @@ async def fetch_example(client: BrowserClient, i: int):
 
 async def main():
     async with BrowserClient() as client:
-        tasks = [fetch_example(client, i) for i in range(10)]
+        tasks = [fetch_example(client, i) for i in range(100)]
         await asyncio.gather(*tasks)
 
 if __name__ == "__main__":
