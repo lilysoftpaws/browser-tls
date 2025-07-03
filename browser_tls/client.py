@@ -1,5 +1,5 @@
 from playwright.async_api import async_playwright, Browser, Page
-from .types import Headers, Method, RequestTimeoutError, Response
+from .types import FetchError, Headers, Method, RequestTimeoutError, Response
 from .utils import build_fetch_script, encode_body_and_headers, apply_query_params
 from typing import Optional, Dict, Any, Union
 
@@ -55,10 +55,18 @@ class BrowserClient:
         )
         result = await self._page.evaluate(script)
 
-        if isinstance(result, dict) and result.get("error") == "AbortError":
-            raise RequestTimeoutError(
-                f"Request to {url} timed out after {timeout} seconds"
-            )
+        if isinstance(result, dict):
+            err = result.get("error")
+            if err == "AbortError":
+                raise RequestTimeoutError(
+                    f"Request to {full_url!r} timed out after {timeout}s"
+                )
+            if err == "TypeError":
+                raise FetchError(
+                    url=full_url,
+                    js_message=result.get("message", "<no message>"),
+                    js_stack=result.get("stack", ""),
+                )
 
         return Response(
             status=result["status"],

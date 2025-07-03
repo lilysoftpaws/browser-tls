@@ -36,7 +36,11 @@ def build_fetch_script(
             }};
         }}))
         .catch(err => {{
-            return {{ error: err.name }};
+            return {{
+                error: err.name,
+                message: err.message,
+                stack: err.stack
+            }};
         }});
     }})()
     """

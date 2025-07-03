@@ -25,3 +25,13 @@ class RequestTimeoutError(Exception):
     """Raised when a browser request times out."""
 
     pass
+
+
+class FetchError(Exception):
+    """Raised when fetch() encounters an error."""
+
+    def __init__(self, url: str, js_message: str, js_stack: str):
+        super().__init__(f"Failed to fetch {url!r}: {js_message}")
+        self.url = url
+        self.js_message = js_message
+        self.js_stack = js_stack
