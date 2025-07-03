@@ -23,4 +23,5 @@ class Response:
 
 class RequestTimeoutError(Exception):
     """Raised when a browser request times out."""
+
     pass

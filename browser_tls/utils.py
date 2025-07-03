@@ -8,12 +8,9 @@ def build_fetch_script(
     method: str,
     headers: Optional[Dict[str, str]] = None,
     body: Optional[str] = None,
-    timeout_ms: Optional[int] = None
+    timeout_ms: Optional[int] = None,
 ) -> str:
-    fetch_options = {
-        "method": method,
-        "headers": headers or {}
-    }
+    fetch_options = {"method": method, "headers": headers or {}}
     if body:
         fetch_options["body"] = body
 
@@ -45,9 +42,9 @@ def build_fetch_script(
     """
     return fetch_script
 
+
 def encode_body_and_headers(
-    data: Optional[Any],
-    headers: Optional[Dict[str, str]]
+    data: Optional[Any], headers: Optional[Dict[str, str]]
 ) -> tuple[Optional[str], Dict[str, str]]:
     final_headers = headers.copy() if headers else {}
 
@@ -61,6 +58,7 @@ def encode_body_and_headers(
         return data, final_headers
     else:
         raise TypeError("Unsupported data type for body: must be dict, list, or str")
+
 
 def apply_query_params(url: str, params: Optional[Dict[str, str]]) -> str:
     if not params:
